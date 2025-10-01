@@ -1,30 +1,38 @@
-import { Request, Response } from "express";
-import { calculateTotal, parseShoppingInput, prettyLines, Item } from "../service/textExtractorService";
+'use strict';
 
-let lastItems: Item[] = [];
+import { Request, Response } from 'express';
+import asyncHandler from 'express-async-handler';
+import * as textExtractorService from '../service/textExtractorService';
 
-export class TextExtractorController {
-  ingest = (req: Request, res: Response) => {
-    const { input } = req.body;
-    
+let lastItems: textExtractorService.Item[] = [];
+
+export const parseInput = asyncHandler(async (req: Request, res: Response) => {
+    const { input } = req.body as { input?: string };
+
     if (!input || !input.trim()) {
-      res.status(400).json({ error: "Input is required" });
-      return;
+        res.status(400).json({
+            success: false,
+            message: 'Input is required'
+        });
+        return;
     }
 
-    lastItems = parseShoppingInput(input);
-    res.json({
-      message: "parsed_and_stored",
-      items: lastItems
-    });
-  };
+    lastItems = textExtractorService.parseShoppingInput(input);
 
-  getAll = (_req: Request, res: Response) => {
-    const total = calculateTotal(lastItems);
-    res.json({ 
-      items: lastItems, 
-      total, 
-      lines: prettyLines(lastItems) 
+    res.json({
+        success: true,
+        message: 'Input processed successfully!!',
+        data: {}
     });
-  };
-}
+});
+
+export const getItemData = asyncHandler(async (_req: Request, res: Response) => {
+    const total = textExtractorService.calculateTotal(lastItems);
+    const lines = textExtractorService.prettyLines(lastItems);
+
+    res.json({
+        success: true,
+        message: 'Items data fetched successfully !!',
+        data: { items: lastItems}
+    });
+});

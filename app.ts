@@ -1,6 +1,6 @@
 import express from "express";
 import textRoutes from "./textExtractor/routes/textExtractorRoutes";
-import salesTaxRoutes from "./salesTax/routes/salesTax.routes";
+import salesTaxRoutes from "./salesTax/routes/salesTaxRoutes";
 
 const app = express();
 app.use(express.json());
@@ -10,8 +10,8 @@ app.use((_, res, next) => {
     next();
 });
 
-app.use("/api", textRoutes);     // existing
-app.use("/api", salesTaxRoutes); // new
+app.use("/api", textRoutes);
+app.use("/api", salesTaxRoutes);
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 app.listen(PORT, "0.0.0.0");

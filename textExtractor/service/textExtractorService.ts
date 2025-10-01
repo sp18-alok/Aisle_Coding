@@ -2,15 +2,15 @@ export type Item = {
     quantity: number; 
     imported: boolean; 
     itemName: string; 
-    price: number 
+    price: number; 
 };
-  
+
 export function parseShoppingInput(input: string): Item[] {
     const text = input.trim().replace(/\n+/g, " ");
     const pattern = /(\d+)\s+(.+?)\s+at\s+([\d.]+)(?=\s+\d+\s+|$)/gi;
     const items: Item[] = [];
     let match;
-  
+
     while ((match = pattern.exec(text)) !== null) {
       const qty = parseInt(match[1]);
       const name = match[2].trim();
@@ -28,7 +28,7 @@ export function parseShoppingInput(input: string): Item[] {
     
     return items;
 }
-  
+
 export function calculateTotal(items: Item[]): number {
     let total = 0;
     for (const item of items) {
@@ -36,7 +36,7 @@ export function calculateTotal(items: Item[]): number {
     }
     return Number(total.toFixed(2));
 }
-  
+
 export function prettyLines(items: Item[]): string[] {
     const lines: string[] = [];
     

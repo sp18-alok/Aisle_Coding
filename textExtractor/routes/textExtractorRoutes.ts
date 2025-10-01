@@ -1,10 +1,9 @@
 import { Router } from "express";
-import { TextExtractorController } from "../controller/textExtractorController";
+import { parseInput, getItemData } from "../controller/textExtractorController";
 
 const router = Router();
-const controller = new TextExtractorController();
 
-router.post("/text", controller.ingest);
-router.get("/text", controller.getAll);
+router.post("/text", parseInput);
+router.get("/text", getItemData);
 
 export default router;
