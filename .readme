@@ -8,4 +8,4 @@ curl --location 'http://localhost:3000/api/text' \
 
 curl --location 'http://localhost:3000/api/text'
 
-curl --location 'http://localhost:3000/api/receipt'
+curl --location 'http://localhost:3000/api/receipt' 
