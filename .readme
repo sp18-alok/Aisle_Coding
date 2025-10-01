@@ -1,0 +1,11 @@
+API Execution Order
+
+npm run build && npm start
+
+curl --location 'http://localhost:3000/api/text' \
+--header 'Content-Type: application/json' \
+--data '{"input":"1 imported box of chocolates at 10.00 1 imported bottle of perfume at 47.50 "}'
+
+curl --location 'http://localhost:3000/api/text'
+
+curl --location 'http://localhost:3000/api/receipt'
