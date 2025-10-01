@@ -27,8 +27,6 @@ export const parseInput = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const getItemData = asyncHandler(async (_req: Request, res: Response) => {
-    const total = textExtractorService.calculateTotal(lastItems);
-    const lines = textExtractorService.prettyLines(lastItems);
 
     res.json({
         success: true,

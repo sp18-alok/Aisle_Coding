@@ -28,29 +28,3 @@ export function parseShoppingInput(input: string): Item[] {
     
     return items;
 }
-
-export function calculateTotal(items: Item[]): number {
-    let total = 0;
-    for (const item of items) {
-      total += item.price * item.quantity;
-    }
-    return Number(total.toFixed(2));
-}
-
-export function prettyLines(items: Item[]): string[] {
-    const lines: string[] = [];
-    
-    lines.push("Parsed Shopping Items:");
-    lines.push("==================================================");
-    
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      const importedText = item.imported ? "imported " : "";
-      lines.push(`${i + 1}. ${item.quantity} ${importedText}${item.itemName} at $${item.price.toFixed(2)}`);
-    }
-    
-    lines.push("==================================================");
-    lines.push(`Total: $${calculateTotal(items).toFixed(2)}`);
-    
-    return lines;
-}
